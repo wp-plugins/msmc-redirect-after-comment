@@ -35,12 +35,18 @@ Contact me at citricguy@gmail.com
 = 1.0 =
 * Initial Release
 
+= 1.1 =
+* License and Readme.txt edits.  No Feature Updates
+
 == Upgrade Notice ==
+
+= 1.1 =
+* No feature changes. Update not required.
 
 = 1.0 =
 * Initial Release
 
-== Arbitrary section ==
+== Other Information ==
 
 The MSMC - Redirect After Comment plugin was developed by Josh Sommers, and is provided with out warranty under the GPLv3 License. More info and other plugins at: http://www.1mauirealestate.com/tech-updates/wordpress-plugin-redirect-after-comment.html
 
