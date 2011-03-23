@@ -4,7 +4,7 @@
   Plugin URI: http://www.1mauirealestate.com/tech-updates/wordpress-plugin-redirect-after-comment.html
   Description: Redirects commenters to defined URL after comment submission
   Author: Josh Sommers
-  Version: 1.0
+  Version: 1.1
   Author URI: http://www.mainstreetmarketingcommunity.com
  */
 
