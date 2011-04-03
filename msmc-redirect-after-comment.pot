@@ -1,0 +1,41 @@
+# Copyright (C) 2010
+# This file is distributed under the same license as the 'MSMC - Redirect After Comment' package.
+msgid ""
+msgstr ""
+"Project-Id-Version:  \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/msmc-redirect-after-comment\n"
+"POT-Creation-Date: 2011-04-03 00:14:16+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: JOSH SOMMERS <citricguy@gmail.com>\n"
+"Language-Team: LANGUAGE <citricguy@gmail.com>\n"
+
+#: msmc_redirect.php:85
+msgid "Please Fix The Errors Below"
+msgstr ""
+
+#: msmc_redirect.php:87
+msgid "Please Enter A Valid URL"
+msgstr ""
+
+#: msmc_redirect.php:95
+msgid "Updated Settings Successfully"
+msgstr ""
+
+#: msmc_redirect.php:105
+msgid "Enable Plugin?"
+msgstr ""
+
+#: msmc_redirect.php:106
+msgid "Enter Redirect URL"
+msgstr ""
+
+#: msmc_redirect.php:107
+msgid "This is where users will be redirected after commenting."
+msgstr ""
+
+#: msmc_redirect.php:116
+msgid "Save Changes"
+msgstr ""
