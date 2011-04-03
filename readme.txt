@@ -4,7 +4,7 @@ Donate link: http://www.1mauirealestate.com/tech-updates/wordpress-plugin-redire
 Tags: comments, redirect, tellafriend, plugin
 Requires at least: 2.8
 Tested up to: 3.1
-Stable tag: trunk
+Stable tag: 2.0
 
 Redirects commenters to a predefined URL after comment submission.
 
@@ -32,13 +32,19 @@ Contact me at citricguy@gmail.com
 
 == Changelog ==
 
-= 1.0 =
-* Initial Release
+= 2.0 =
+* Added Internationalization Support
 
 = 1.1 =
 * License and Readme.txt edits.  No Feature Updates
 
+= 1.0 =
+* Initial Release
+
 == Upgrade Notice ==
+
+= 2.0 =
+* Still need language files.
 
 = 1.1 =
 * No feature changes. Update not required.

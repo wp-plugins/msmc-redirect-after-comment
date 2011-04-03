@@ -2,9 +2,9 @@
 /*
   Plugin Name: MSMC - Redirect After Comment
   Plugin URI: http://www.1mauirealestate.com/tech-updates/wordpress-plugin-redirect-after-comment.html
-  Description: Redirects commenters to defined URL after comment submission
+  Description: Redirects commenters to a predefined URL after clicking submit.
   Author: Josh Sommers
-  Version: 1.11
+  Version: 2.0
   Author URI: http://www.mainstreetmarketingcommunity.com
  */
 
@@ -24,6 +24,9 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
+
+if (!load_plugin_textdomain('msmc-redirect-after-comment', '/wp-content/languages/'))
+    load_plugin_textdomain('msmc-redirect-after-comment', '/wp-content/plugins/msmc-redirect-after-comment/');
 
 /* Installation and Removal */
 register_activation_hook(__FILE__, 'MSMC_redirect_install');
@@ -79,15 +82,18 @@ function msmc_comment_redirect_plugin_page() {
             } else {
                 $do_update = FALSE;
                 $settings['redirect_to'] = $_REQUEST['MSMC_redirect_location'];
-                $result_notice = '<div style="height: 20px; width: 500px; background-color: #FF6699; padding: 10px; font-weight: bold;" >Please Fix The Errors Below</div>';
-                $show_url_warning = '<span style="color: red;">Please Enter A Valid URL</span><br />';
+                $notice_warning = __("Please Fix The Errors Below", 'msmc-redirect-after-comment');
+                $result_notice = '<div style="height: 20px; width: 500px; background-color: #FF6699; padding: 10px; font-weight: bold;" >'.$notice_warning.'</div>';
+                $notice_validate = __("Please Enter A Valid URL", 'msmc-redirect-after-comment');
+                $show_url_warning = '<span style="color: red;">'.$notice_validate.'</span><br />';
             }
         }
 
         // Update Settings
         if ($do_update) {
             update_option('MSMC_redirect_settings', $update_array);
-            $result_notice = '<div style="height: 20px; width: 500px; background-color: #FFFBCC; padding: 10px; font-weight: bold;" >Updated Successfully</div>';
+            $notice_success = __("Updated Settings Successfully", 'msmc-redirect-after-comment');
+            $result_notice = '<div style="height: 20px; width: 500px; background-color: #FFFBCC; padding: 10px; font-weight: bold;" >'.$notice_success.'</div>';
         }
     }
 ?>
@@ -95,11 +101,10 @@ function msmc_comment_redirect_plugin_page() {
         <h2>MSMC - Redirect After Comment</h2>
     <?php echo $result_notice; ?>
     <form method="post" action="" id="feedflare-settings">
-        <?php //wp_nonce_field('update-options');  ?>
         <br />
-        <input type="checkbox" name="MSMC_redirect_enabled" value="checked" <?php echo $settings['enabled']; ?> /> <strong>Enable This Plugin</strong><br /><br />
-        <strong>Enter Redirect URL:</strong><br />
-        <span style="font-style: italic; color: #B2B2B2;">This is where users will be redirected after commenting.</span><br />
+        <input type="checkbox" name="MSMC_redirect_enabled" value="checked" <?php echo $settings['enabled']; ?> /> <strong><?php _e("Enable Plugin?", 'msmc-redirect-after-comment'); ?></strong><br /><br />
+        <strong><?php _e("Enter Redirect URL", 'msmc-redirect-after-comment'); ?>:</strong><br />
+        <span style="font-style: italic; color: #B2B2B2;"><?php _e("This is where users will be redirected after commenting.", 'msmc-redirect-after-comment'); ?></span><br />
         <?php echo $show_url_warning; ?>
         <input type="text" name="MSMC_redirect_location" size="60" id="MSMC_redirect_location"
                value="<?php echo $settings['redirect_to']; ?>" /><br />
@@ -108,7 +113,7 @@ function msmc_comment_redirect_plugin_page() {
         <input type="hidden" name="action" value="update" />
         <input type="hidden" name="page_options" value="MSMC_redirect_settings" />
         <p>
-            <input type="submit" value="<?php _e('Save Changes') ?>" />
+            <input type="submit" value="<?php _e('Save Changes', 'msmc-redirect-after-comment') ?>" />
         </p>
     </form>
 </div>
