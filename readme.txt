@@ -10,9 +10,27 @@ Redirects commenters to a predefined URL after comment submission.
 
 == Description ==
 
-Redirects commenters to a predefined URL after comment submission.
+The "Redirect After Comment" plugin allows you to automatically redirect your users to a predefined page after they leave a comment on your WordPress blog.
 
-PHP 5.2.0 or greater required.
+Usage is simple.  Once the plugin has been installed you will need to configure where your commenters should be redirected.
+
+In the WordPress control panel, on the left hand side of the admin panel look in the ‘settings’ section for the heading titled ‘Comment Redirect.’
+
+In the settings you will see two fields:
+
+The first field is the "Enable Plugin?" option.  The plugin is not functional until you check this box.  This allows you to quickly enable and disable this plugin while you’re working on the page you plan to send commenters.
+
+The second field is titled "Enter Redirect URL."  Here is where you will enter the full URL to where you want to send users once they have successfully submitted a comment on your blog.  For example, if you wanted to send all of your commenters to example.com you would simply enter http://www.example.com/ in the box.
+
+If you already have a page on your site that you would like to send users, simply copy and paste that URL into the "Enter Redirect URL" field.
+
+Ideas for redirects:
+1. A "Tell-a-friend" page.
+1. A survey.
+1. Your Facebook FanPage/Profile
+1. A Sales Page or A Special Offer
+
+*Note: PHP 5.2.0 or greater required for URL verification.*
 
 == Installation ==
 
