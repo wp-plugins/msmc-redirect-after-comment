@@ -3,8 +3,8 @@ Contributors: citricguy
 Donate link: http://www.1mauirealestate.com/tech-updates/wordpress-plugin-redirect-after-comment.html
 Tags: comments, redirect, tellafriend, plugin
 Requires at least: 2.8
-Tested up to: 3.1
-Stable tag: 2.0
+Tested up to: 3.1.1
+Stable tag: 2.0.1
 
 Redirects commenters to a predefined URL after comment submission.
 
