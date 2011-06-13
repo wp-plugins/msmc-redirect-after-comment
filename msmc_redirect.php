@@ -4,7 +4,7 @@
   Plugin URI: http://www.1mauirealestate.com/tech-updates/wordpress-plugin-redirect-after-comment.html
   Description: Redirects commenters to a predefined URL after clicking submit.
   Author: Josh Sommers
-  Version: 2.1.1
+  Version: 2.1.2
   Author URI: http://www.mainstreetmarketingcommunity.com
  */
 
@@ -92,7 +92,6 @@ function msmc_comment_redirect_plugin_page() {
 
         // Set Redirect URL
         if (isset($_REQUEST['MSMC_redirect_location'])) {
-            $_REQUEST['MSMC_redirect_location'] = strtolower($_REQUEST['MSMC_redirect_location']);
             // Requires PHP 5.2.0 or newer
             if ((filter_var($_REQUEST['MSMC_redirect_location'], FILTER_VALIDATE_URL)) || (strtolower($_REQUEST['MSMC_redirect_location']) == '[last]')) {
                 $update_array['redirect_to'] = $_REQUEST['MSMC_redirect_location'];
