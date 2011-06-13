@@ -3,7 +3,7 @@ Contributors: citricguy
 Donate link: http://www.1mauirealestate.com/tech-updates/wordpress-plugin-redirect-after-comment.html
 Tags: comments, redirect, tellafriend, plugin
 Requires at least: 2.8
-Tested up to: 3.1.1
+Tested up to: 3.1.3
 Stable tag: 2.0.1
 
 Redirects commenters to a predefined URL after comment submission.
@@ -22,13 +22,15 @@ The first field is the "Enable Plugin?" option.  The plugin is not functional un
 
 The second field is titled "Enter Redirect URL."  Here is where you will enter the full URL to where you want to send users once they have successfully submitted a comment on your blog.  For example, if you wanted to send all of your commenters to example.com you would simply enter http://www.example.com/ in the box.
 
-If you already have a page on your site that you would like to send users, simply copy and paste that URL into the "Enter Redirect URL" field.
+You can also enter "[last]" in the "Enter Redirect URL" box to send users back to the page they originally commented from.
+
+If you already have a page on your site that you would like to send users to, simply copy and paste that URL into the "Enter Redirect URL" field.
 
 Ideas for redirects:
 1. A "Tell-a-friend" page.
-1. A survey.
-1. Your Facebook FanPage/Profile
-1. A Sales Page or A Special Offer
+2. A survey.
+3. Your Facebook FanPage/Profile
+4. A Sales Page or A Special Offer
 
 *Note: PHP 5.2.0 or greater required for URL verification.*
 
@@ -50,7 +52,17 @@ Contact me at citricguy@gmail.com
 
 == Changelog ==
 
-= 2.0 =
+= 2.1.0  =
+* Fixed license
+* Added the ability to redirect users back to the page they originally commented from. (Using "[last]" in the URL field.)
+* Fixed HTTP vs HTTPS detection while using [last]
+* No longer force lower case url's (sorry IIS uers)
+* As always, please report any bugs directly to citricguy@gmail.com!  Mahalo!
+
+= 2.0.1  =
+* Readme.txt updates
+
+= 2.0  =
 * Added Internationalization Support
 
 = 1.1 =
@@ -74,7 +86,7 @@ Contact me at citricguy@gmail.com
 
 The MSMC - Redirect After Comment plugin was developed by Josh Sommers, and is provided with out warranty under the GPLv3 License. More info and other plugins at: http://www.1mauirealestate.com/tech-updates/wordpress-plugin-redirect-after-comment.html
 
-Copyright 2011  Josh Sommers  (email : citricguy@gmail.com)
+Josh Sommers  (email : citricguy@gmail.com)
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 

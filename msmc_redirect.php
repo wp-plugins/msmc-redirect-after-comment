@@ -4,11 +4,11 @@
   Plugin URI: http://www.1mauirealestate.com/tech-updates/wordpress-plugin-redirect-after-comment.html
   Description: Redirects commenters to a predefined URL after clicking submit.
   Author: Josh Sommers
-  Version: 2.0.1
+  Version: 2.1.0
   Author URI: http://www.mainstreetmarketingcommunity.com
  */
 
-/*  Copyright 2011  Josh Sommers  (Email : citricguy@gmail.com)
+/*  Josh Sommers  (Email : citricguy@gmail.com)
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
 if (!load_plugin_textdomain('msmc-redirect-after-comment', '/wp-content/languages/'))
@@ -47,8 +47,25 @@ if ($settings['enabled'] != '') {
 }
 
 function msmc_do_comment_redirect() {
+    //echo "<pre>"; var_dump($GLOBALS); die;
     $settings = get_option('MSMC_redirect_settings');
+    if (strtolower($settings['redirect_to']) == ('[last]')) {
+        return urldecode($_REQUEST["msmc_redirect_referrer"]);
+    }
     return $settings['redirect_to'];
+}
+
+add_action('comment_form', 'msmc_insert_hidden_field');
+
+function msmc_insert_hidden_field() {
+    if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+            || $_SERVER['SERVER_PORT'] == 443) {
+
+        $msmc_protocol = 'https://';
+    } else {
+        $msmc_protocol = 'http://';
+    }
+    echo '<input type="hidden" name="msmc_redirect_referrer" value="' .  $msmc_protocol . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . '" />';
 }
 
 /* Administration */
@@ -75,17 +92,18 @@ function msmc_comment_redirect_plugin_page() {
 
         // Set Redirect URL
         if (isset($_REQUEST['MSMC_redirect_location'])) {
+            $_REQUEST['MSMC_redirect_location'] = strtolower($_REQUEST['MSMC_redirect_location']);
             // Requires PHP 5.2.0 or newer
-            if (filter_var($_REQUEST['MSMC_redirect_location'], FILTER_VALIDATE_URL)) {
+            if ((filter_var($_REQUEST['MSMC_redirect_location'], FILTER_VALIDATE_URL)) || (strtolower($_REQUEST['MSMC_redirect_location']) == '[last]')) {
                 $update_array['redirect_to'] = $_REQUEST['MSMC_redirect_location'];
                 $settings['redirect_to'] = $_REQUEST['MSMC_redirect_location'];
             } else {
                 $do_update = FALSE;
                 $settings['redirect_to'] = $_REQUEST['MSMC_redirect_location'];
                 $notice_warning = __("Please Fix The Errors Below", 'msmc-redirect-after-comment');
-                $result_notice = '<div style="height: 20px; width: 500px; background-color: #FF6699; padding: 10px; font-weight: bold;" >'.$notice_warning.'</div>';
+                $result_notice = '<div style="height: 20px; width: 500px; background-color: #FF6699; padding: 10px; font-weight: bold;" >' . $notice_warning . '</div>';
                 $notice_validate = __("Please Enter A Valid URL", 'msmc-redirect-after-comment');
-                $show_url_warning = '<span style="color: red;">'.$notice_validate.'</span><br />';
+                $show_url_warning = '<span style="color: red;">' . $notice_validate . '</span><br />';
             }
         }
 
@@ -93,30 +111,30 @@ function msmc_comment_redirect_plugin_page() {
         if ($do_update) {
             update_option('MSMC_redirect_settings', $update_array);
             $notice_success = __("Updated Settings Successfully", 'msmc-redirect-after-comment');
-            $result_notice = '<div style="height: 20px; width: 500px; background-color: #FFFBCC; padding: 10px; font-weight: bold;" >'.$notice_success.'</div>';
+            $result_notice = '<div style="height: 20px; width: 500px; background-color: #FFFBCC; padding: 10px; font-weight: bold;" >' . $notice_success . '</div>';
         }
     }
-?>
+    ?>
     <div class="wrap">
         <h2>MSMC - Redirect After Comment</h2>
     <?php echo $result_notice; ?>
-    <form method="post" action="" id="feedflare-settings">
-        <br />
-        <input type="checkbox" name="MSMC_redirect_enabled" value="checked" <?php echo $settings['enabled']; ?> /> <strong><?php _e("Enable Plugin?", 'msmc-redirect-after-comment'); ?></strong><br /><br />
-        <strong><?php _e("Enter Redirect URL", 'msmc-redirect-after-comment'); ?>:</strong><br />
-        <span style="font-style: italic; color: #B2B2B2;"><?php _e("This is where users will be redirected after commenting.", 'msmc-redirect-after-comment'); ?></span><br />
-        <?php echo $show_url_warning; ?>
-        <input type="text" name="MSMC_redirect_location" size="60" id="MSMC_redirect_location"
-               value="<?php echo $settings['redirect_to']; ?>" /><br />
-        <p>(ex. http://www.example.com/)</p>
+        <form method="post" action="" id="feedflare-settings">
+            <br />
+            <input type="checkbox" name="MSMC_redirect_enabled" value="checked" <?php echo $settings['enabled']; ?> /> <strong><?php _e("Enable Plugin?", 'msmc-redirect-after-comment'); ?></strong><br /><br />
+            <strong><?php _e("Enter Redirect URL", 'msmc-redirect-after-comment'); ?>:</strong><br />
+            <span style="font-style: italic; color: #B2B2B2;"><?php _e("This is where users will be redirected after commenting.", 'msmc-redirect-after-comment'); ?></span><br />
+    <?php echo $show_url_warning; ?>
+            <input type="text" name="MSMC_redirect_location" size="60" id="MSMC_redirect_location"
+                   value="<?php echo $settings['redirect_to']; ?>" /><br />
+            <p><h2>Additional Usage Notes</h2>Enter URL's in using the standard complete format: <strong>http://www.example.com/example_extended</strong><br /><br />You can also enter <strong>[last]</strong> (include the square brackets) <br />if you wish to send commenters back to the page they originally commented from.</p>
 
-        <input type="hidden" name="action" value="update" />
-        <input type="hidden" name="page_options" value="MSMC_redirect_settings" />
-        <p>
-            <input type="submit" value="<?php _e('Save Changes', 'msmc-redirect-after-comment') ?>" />
-        </p>
-    </form>
-</div>
-<?php
-    }
+            <input type="hidden" name="action" value="update" />
+            <input type="hidden" name="page_options" value="MSMC_redirect_settings" />
+            <p>
+                <input type="submit" value="<?php _e('Save Changes', 'msmc-redirect-after-comment') ?>" />
+            </p>
+        </form>
+    </div>
+    <?php
+}
 ?>
